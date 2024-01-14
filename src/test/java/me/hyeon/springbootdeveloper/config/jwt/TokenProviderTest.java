@@ -29,31 +29,10 @@ class TokenProviderTest {
     private JwtProperties jwtProperties;
 
     // generateToken() 검증 테스트
-//    @DisplayName("generateToken(): 유저 정보와 만료기간을 전달해 토큰을 만들 수 있다.")
-//    @Test
-//    void generateToken(){
-//
-//        // given
-//        User testUser = userRepository.save(User.builder()
-//                .email("user@gmail.com")
-//                .password("test")
-//                .build());
-//
-//        // when
-//        String token = tokenProvider.generateToken(testUser, Duration.ofDays(14));
-//
-//        //then
-//        Long userId = Jwts.parser()
-//                .setSigningKey(jwtProperties.getSecretKey())
-//                .parseClaimsJws(token)
-//                .getBody()
-//                .get("id", Long.class);
-//
-//        assertThat(userId).isEqualTo(testUser.getId());
-//    }
-    @DisplayName("generateToken(): 유저 정보와 만료 기간을 전달해 토큰을 만들 수 있다.")
+    @DisplayName("generateToken(): 유저 정보와 만료기간을 전달해 토큰을 만들 수 있다.")
     @Test
-    void generateToken() {
+    void generateToken(){
+
         // given
         User testUser = userRepository.save(User.builder()
                 .email("user@gmail.com")
@@ -63,7 +42,7 @@ class TokenProviderTest {
         // when
         String token = tokenProvider.generateToken(testUser, Duration.ofDays(14));
 
-        // then
+        //then
         Long userId = Jwts.parser()
                 .setSigningKey(jwtProperties.getSecretKey())
                 .parseClaimsJws(token)
@@ -72,7 +51,6 @@ class TokenProviderTest {
 
         assertThat(userId).isEqualTo(testUser.getId());
     }
-
 
     // vailidToken() 검증 테스트
     @DisplayName("validToken(): 만료된 토큰인 때에 유효성 검증에 실패한다.")
