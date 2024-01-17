@@ -21,4 +21,10 @@ public class UserService {
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
                 .build()).getId();
     }
+
+    // 토큰 API 구현하기 메서드 추가
+    public User findById(Long userID){
+        return userRepository.findById(userID)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
 }
